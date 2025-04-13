@@ -4,6 +4,7 @@ import com.echo.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -24,13 +25,14 @@ import static org.springframework.http.HttpMethod.*;
 @RequiredArgsConstructor
 public class SecurityBeans {
     private final UserRepository userRepository;
-
+    private Environment environment;
     // cors configuration
-    private List<String> allowedOrigins = List.of(CorsConfiguration.ALL);
+//    private List<String> allowedOrigins = List.of(CorsConfiguration.ALL);
+    private List<String> allowedOrigins = List.of("http://localhost:4200", "production api here");
     private List<String> allowedHttpHeaders = List.of(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE);
     private List<String> allowedHttpMethods = List.of(
-            GET.name(), POST.name(), PUT.name(), PATCH.name(), DELETE.name()
-    );
+            GET.name(), POST.name(), PUT.name(), PATCH.name(), DELETE.name(), OPTIONS.name()
+    );  
 
 
     @Bean

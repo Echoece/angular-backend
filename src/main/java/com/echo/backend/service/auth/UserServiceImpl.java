@@ -2,6 +2,8 @@ package com.echo.backend.service.auth;
 
 import com.echo.backend.config.security.JwtService;
 import com.echo.backend.entity.Users;
+import com.echo.backend.exception.customException.ApiAuthorizationException;
+import com.echo.backend.exception.customException.ApiNotFoundException;
 import com.echo.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,7 +35,7 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public Users update(Users payload, Long id) {
+    public Users update(Users payload, Long id) throws ApiNotFoundException {
         findById(id);
 
         payload.setId(id);
@@ -45,7 +47,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Users updatePartial(Users payload, Long id) {
+    public Users updatePartial(Users payload, Long id) throws ApiNotFoundException {
         Users savedUsers = findById(id);
 
         payload.setId(id);
@@ -62,24 +64,24 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Users findById(Long id) {
+    public Users findById(Long id) throws ApiNotFoundException {
         return userRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Cant find user"));
+                .orElseThrow(()-> new ApiNotFoundException("Cant find user"));
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws ApiNotFoundException {
         Users users = findById(id);
         userRepository.delete(users);
     }
 
     @Override
-    public Users login(Users payload) {
+    public Users login(Users payload) throws ApiAuthorizationException {
         Users savedUser = userRepository.findByEmailIgnoreCase(payload.getEmail())
-                .orElseThrow(()-> new RuntimeException("user doesnt exists"));
+                .orElseThrow(()-> new ApiAuthorizationException("user doesnt exists"));
 
         if (!encoder.matches(payload.getPassword(), savedUser.getPassword())){
-            throw new RuntimeException("incorrect email/password");
+            throw new ApiAuthorizationException("incorrect email/password");
         }
 
         payload.setToken(buildToken(savedUser));
