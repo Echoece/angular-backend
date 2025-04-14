@@ -20,7 +20,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final  CustomAccessDeniedHandler  customAccessDeniedHandler;
+    private final CustomAccessDeniedHandler  customAccessDeniedHandler;
     private final CorsConfigurationSource corsConfigurationSource;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final String[] WHITELIST_URL = {"/api/v1/auth/**"};

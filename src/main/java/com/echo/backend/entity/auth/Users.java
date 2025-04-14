@@ -1,8 +1,10 @@
-package com.echo.backend.entity;
+package com.echo.backend.entity.auth;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +14,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -20,6 +24,7 @@ import java.util.Collection;
 @Setter
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(scope = Users.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +42,21 @@ public class Users implements UserDetails {
 
     @Transient
     private String token;
+
+    @Transient
+    private Set<Permissions> permissionList;
+
+    @Transient
+    private Set<Roles> roleList;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Roles> roles = new HashSet<>();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -61,5 +81,15 @@ public class Users implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Set<Permissions> getAllPermissions() {
+        Set<Permissions> permissions = new HashSet<>();
+
+        for (Roles role : roles) {
+            permissions.addAll(role.getPermissions());
+        }
+
+        return permissions;
     }
 }

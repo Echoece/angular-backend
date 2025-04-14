@@ -1,13 +1,12 @@
 package com.echo.backend.controller;
 
-import com.echo.backend.entity.Users;
+import com.echo.backend.entity.auth.Users;
 import com.echo.backend.exception.customException.ApiAuthorizationException;
 import com.echo.backend.exception.customException.ApiNotFoundException;
 import com.echo.backend.response.ApiResponse;
 import com.echo.backend.service.auth.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

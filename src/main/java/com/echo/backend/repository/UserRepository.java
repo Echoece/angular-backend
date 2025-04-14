@@ -1,6 +1,6 @@
 package com.echo.backend.repository;
 
-import com.echo.backend.entity.Users;
+import com.echo.backend.entity.auth.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

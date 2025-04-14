@@ -1,7 +1,7 @@
 package com.echo.backend.service.auth;
 
 import com.echo.backend.config.security.JwtService;
-import com.echo.backend.entity.Users;
+import com.echo.backend.entity.auth.Users;
 import com.echo.backend.exception.customException.ApiAuthorizationException;
 import com.echo.backend.exception.customException.ApiNotFoundException;
 import com.echo.backend.repository.UserRepository;
@@ -88,6 +88,8 @@ public class UserServiceImpl implements UserService{
         payload.setType(savedUser.getType());
         payload.setId(savedUser.getId());
         payload.setUsername(savedUser.getUsername());
+        payload.setRoleList(savedUser.getRoles());
+        payload.setPermissionList(savedUser.getAllPermissions());
 
         return payload;
     }
@@ -96,4 +98,6 @@ public class UserServiceImpl implements UserService{
         Map<String,Object> claims = Map.of("email", users.getEmail());
         return jwtService.generateToken(claims, users);
     }
+
+
 }

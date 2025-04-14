@@ -1,6 +1,6 @@
 package com.echo.backend.service.auth;
 
-import com.echo.backend.entity.Users;
+import com.echo.backend.entity.auth.Users;
 import com.echo.backend.exception.customException.ApiAuthorizationException;
 import com.echo.backend.exception.customException.ApiNotFoundException;
 import org.springframework.data.domain.Page;
