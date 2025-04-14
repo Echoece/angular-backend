@@ -1,0 +1,47 @@
+By default, JPA/Hibernate doesn't know how to handle JSON columns like settings. It works fine with
+String, int, Date, etc., but not JSON objects. It’ll just treat the JSON as a raw string. In such cases
+we can use converters, it writes in db as a string, and reads the data from db as json (or any type).
+
+Example:
+-> In entity class level annotation:
+        @TypeDefs({
+            @TypeDef(name = "json", typeClass = JsonStringType.class)
+        })
+✅ This says: “Hey Hibernate, when I say @Type(type = "json"), use JsonStringType to convert between
+Java and DB JSON.”
+
+
+-> Then in columns we can use :
+1.      @Type(type = "json")
+        @Column(columnDefinition = "json")
+        private List<String> tags;
+
+2.      @Type(type = "json")
+        @Column(columnDefinition = "json")
+        private Map<String, Object> settings;
+
+
+In spring boot 3 (Hibernate 6.x+ to be more exact) @TypeDef, @Type are removed, Instead converters
+are used.
+
+Example for hibernate 6+ :
+
+            @Entity
+            public class MyEntity {
+
+                @Id
+                private Long id;
+
+                @Convert(converter = ListJsonConverter.class)
+                @Column(name = "my_list")
+                private List<String> stringList;
+
+                @Convert(converter = MapJsonConverter.class)
+                @Column(name = "my_map")
+                private Map<String, String> myMap;
+            }
+
+Important Note: if we do @Converter(autoApply = true), in the custom converter class, we dont need
+to specify @Convert(converter = MapJsonConverter.class) for example in columns, it will be auto applied.
+But if we dont use autoapply, we need to manually specify the columns with annotations.
+

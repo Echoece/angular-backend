@@ -1,5 +1,6 @@
 package com.echo.backend.entity.auth;
 
+import com.echo.backend.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,10 +23,7 @@ import java.util.Set;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonIdentityInfo(scope = Permissions.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Permissions {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Permissions extends BaseEntity {
 
     private String name;
 

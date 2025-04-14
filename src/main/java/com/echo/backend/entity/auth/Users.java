@@ -1,6 +1,7 @@
 package com.echo.backend.entity.auth;
 
 
+import com.echo.backend.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,11 +26,7 @@ import java.util.Set;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonIdentityInfo(scope = Users.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Users implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Users extends BaseEntity implements UserDetails {
     private String username;
 
     @Column(unique = true)
@@ -49,7 +46,7 @@ public class Users implements UserDetails {
     @Transient
     private Set<Roles> roleList;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
