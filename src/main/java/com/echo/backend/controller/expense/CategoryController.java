@@ -1,9 +1,9 @@
 package com.echo.backend.controller.expense;
 
 import com.echo.backend.dto.expense.ExpenseFilter;
-import com.echo.backend.entity.expense.Category;
+import com.echo.backend.entity.examples.expense.Category;
 import com.echo.backend.exception.customException.ApiSystemException;
-import com.echo.backend.service.expense.CategoryService;
+import com.echo.backend.service.examples.expense.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

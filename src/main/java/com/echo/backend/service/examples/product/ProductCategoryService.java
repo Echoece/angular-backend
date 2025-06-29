@@ -1,8 +1,8 @@
-package com.echo.backend.service.product;
+package com.echo.backend.service.examples.product;
 
 
 import com.echo.backend.dto.product.ProductFilter;
-import com.echo.backend.entity.ProductCategory;
+import com.echo.backend.entity.examples.ProductCategory;
 import com.echo.backend.exception.customException.ApiSystemException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

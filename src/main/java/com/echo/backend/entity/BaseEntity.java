@@ -17,7 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class BaseEntity {
+public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

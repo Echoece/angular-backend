@@ -1,7 +1,7 @@
-package com.echo.backend.service.expense;
+package com.echo.backend.service.examples.expense;
 
 import com.echo.backend.dto.expense.ExpenseFilter;
-import com.echo.backend.entity.expense.Category;
+import com.echo.backend.entity.examples.expense.Category;
 import com.echo.backend.exception.customException.ApiSystemException;
 import com.echo.backend.repository.expense.CategoryRepository;
 import lombok.RequiredArgsConstructor;

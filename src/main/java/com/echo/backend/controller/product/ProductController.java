@@ -1,9 +1,9 @@
 package com.echo.backend.controller.product;
 
 import com.echo.backend.dto.product.ProductFilter;
-import com.echo.backend.entity.Product;
+import com.echo.backend.entity.examples.Product;
 import com.echo.backend.exception.customException.ApiSystemException;
-import com.echo.backend.service.product.ProductService;
+import com.echo.backend.service.examples.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

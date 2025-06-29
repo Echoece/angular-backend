@@ -1,4 +1,4 @@
-package com.echo.backend.entity.expense;
+package com.echo.backend.entity.examples.expense;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

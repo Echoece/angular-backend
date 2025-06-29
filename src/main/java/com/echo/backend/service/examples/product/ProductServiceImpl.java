@@ -1,7 +1,7 @@
-package com.echo.backend.service.product;
+package com.echo.backend.service.examples.product;
 
 import com.echo.backend.dto.product.ProductFilter;
-import com.echo.backend.entity.Product;
+import com.echo.backend.entity.examples.Product;
 import com.echo.backend.exception.customException.ApiBadRequestException;
 import com.echo.backend.exception.customException.ApiSystemException;
 import com.echo.backend.repository.ProductRepository;

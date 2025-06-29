@@ -1,6 +1,6 @@
 package com.echo.backend.repository.expense;
 
-import com.echo.backend.entity.expense.ExpenseDetails;
+import com.echo.backend.entity.examples.expense.ExpenseDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

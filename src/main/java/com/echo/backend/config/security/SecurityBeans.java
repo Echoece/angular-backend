@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -28,8 +29,8 @@ public class SecurityBeans {
     private Environment environment;
     // cors configuration
 //    private List<String> allowedOrigins = List.of(CorsConfiguration.ALL);
-    private List<String> allowedOrigins = List.of("http://localhost:4200", "production api here");
-    private List<String> allowedHttpHeaders = List.of(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE);
+    private List<String> allowedOrigins = List.of("http://localhost:4200/", "production api here");
+    private List<String> allowedHttpHeaders = List.of(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE, HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN);
     private List<String> allowedHttpMethods = List.of(
             GET.name(), POST.name(), PUT.name(), PATCH.name(), DELETE.name(), OPTIONS.name()
     );  
@@ -68,7 +69,8 @@ public class SecurityBeans {
         configuration.setAllowedOrigins(allowedOrigins);
         configuration.setAllowedMethods(allowedHttpMethods);
         configuration.setAllowedHeaders(allowedHttpHeaders);
-//        corsConfig.setAllowCredentials(true);
+        configuration.setExposedHeaders(List.of(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE));
+//        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);

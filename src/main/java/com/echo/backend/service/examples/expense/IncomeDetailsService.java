@@ -1,8 +1,8 @@
-package com.echo.backend.service.expense;
+package com.echo.backend.service.examples.expense;
 
 
 import com.echo.backend.dto.expense.ExpenseFilter;
-import com.echo.backend.entity.expense.IncomeDetails;
+import com.echo.backend.entity.examples.expense.IncomeDetails;
 import com.echo.backend.exception.customException.ApiSystemException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

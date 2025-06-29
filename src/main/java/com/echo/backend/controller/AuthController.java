@@ -55,4 +55,6 @@ public class AuthController {
         Map<String, String> message = Map.of("message", "User Deleted Successfully");
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
+    
 }

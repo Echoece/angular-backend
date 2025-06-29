@@ -1,4 +1,4 @@
-package com.echo.backend.entity;
+package com.echo.backend.entity.examples.expense;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -8,24 +8,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "products")
+@Table(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Product {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-    private String description;
-
-    @ManyToOne
-    private ProductCategory productCategory;
-
-    private Double unitPrice;
-
 }
