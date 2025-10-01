@@ -2,16 +2,20 @@ package com.echo.backend.controller;
 
 import com.echo.backend.dto.PatientFilter;
 import com.echo.backend.entity.Patient;
+import com.echo.backend.entity.auth.Users;
 import com.echo.backend.exception.customException.ApiSystemException;
 import com.echo.backend.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/patients")
 @RequiredArgsConstructor
@@ -19,8 +23,9 @@ public class PatientController extends BaseController {
     private final PatientService service;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Patient payload) throws ApiSystemException {
-        return buildResponseCreated(service.save(payload));
+    public ResponseEntity<?> create(@RequestBody Patient payload, Authentication authentication) throws ApiSystemException {
+        Users user = (Users) authentication.getPrincipal();
+        return buildResponseCreated(service.save(payload, user));
     }
 
     @PutMapping("/{id}")

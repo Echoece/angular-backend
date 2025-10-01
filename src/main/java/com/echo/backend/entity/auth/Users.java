@@ -54,6 +54,11 @@ public class Users extends BaseEntity implements UserDetails {
     )
     private Set<Roles> roles = new HashSet<>();
 
+    private String googleId;
+    private String linkedInId;
+    private String githubId;
+
+    private String avatarUrl;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

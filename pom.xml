@@ -87,6 +87,34 @@
             <scope>test</scope>
         </dependency>
 
+        <!--google auth client-->
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.32.1</version>
+        </dependency>
+
+        <!--
+            google-api-client depends on google-http-client internally, but does NOT pull in
+            the http-client transport or JSON factories by default.
+
+            Why? Because Google lets us choose:
+            -> What HTTP transport? NetHttpTransport (JavaNet) or ApacheHttpTransport or Android-specific?
+            -> What JSON library? Jackson2, Gson, or Android JSON?
+            ✅ This is normal and by design — Google lets us choose our HTTP and JSON combo.
+        -->
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+            <version>1.47.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <version>1.47.1</version>
+        </dependency>
+
         <!--jwt dependency-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -108,6 +136,17 @@
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+
+        <!--cache dependency-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
         </dependency>
     </dependencies>
 

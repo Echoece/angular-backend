@@ -52,7 +52,7 @@ public abstract class BaseController {
     }
 
     public <T> ResponseEntity<ApiResponse<T>> buildResponseCreated(T data){
-        return new ResponseEntity<>(ApiResponse.success("Created",data), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.success("Created",data, HttpStatus.CREATED.value()), HttpStatus.CREATED);
     }
 
     public <T> ResponseEntity<ApiResponse<T>> buildResponseUpdated(T data){

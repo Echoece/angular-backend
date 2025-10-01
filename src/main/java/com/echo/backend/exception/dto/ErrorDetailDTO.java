@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Created by Faruque on 5/30/2017.
+ * Created by Rafiq on 5/30/2017.
  */
 @Getter @Setter
 @NoArgsConstructor
@@ -18,7 +18,5 @@ public class ErrorDetailDTO {
     private String value;
 
     private String message;
-
-
 
 }

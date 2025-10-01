@@ -52,6 +52,14 @@ public class ApiResponse<T>{
                 .build();
     }
 
+    public static <T> ApiResponse<T> success(String message, T data, int status) {
+        return ApiResponse.<T>builder()
+                .status(status)
+                .message(message)
+                .data(data)
+                .build();
+    }
+
     // Error static factory methods
     public static ApiResponse<Void> error(int status, String message) {
 

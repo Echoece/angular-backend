@@ -1,10 +1,14 @@
 package com.echo.backend.service.auth;
 
+import com.echo.backend.auth.dto.OAuth2RequestDto;
+import com.echo.backend.auth.enums.ServiceProvider;
 import com.echo.backend.entity.auth.Users;
 import com.echo.backend.exception.customException.ApiAuthorizationException;
 import com.echo.backend.exception.customException.ApiNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Map;
 
 public interface UserService {
     Users save(Users payload);
@@ -20,4 +24,8 @@ public interface UserService {
     void delete(Long id) throws ApiNotFoundException;
 
     Users login(Users payload) throws ApiAuthorizationException;
+
+    String getAuthorizationUrl(ServiceProvider provider, Map<String, Object> params);
+
+    Users oAuth2Login(OAuth2RequestDto payload) throws Exception;
 }

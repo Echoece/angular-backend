@@ -11,4 +11,10 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<Users, Long> {
     @EntityGraph(attributePaths = {"roles", "roles.permissions"})
     Optional<Users> findByEmailIgnoreCase(String email);
+
+    Users findUsersByGoogleId(String googleUserId);
+
+    Users findUsersByLinkedInId(String linkedInId);
+
+    Users findUsersByGithubId(String githubId);
 }

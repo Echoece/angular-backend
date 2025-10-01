@@ -29,12 +29,11 @@ public class SecurityBeans {
     private Environment environment;
     // cors configuration
 //    private List<String> allowedOrigins = List.of(CorsConfiguration.ALL);
-    private List<String> allowedOrigins = List.of("http://localhost:4200/", "production api here");
-    private List<String> allowedHttpHeaders = List.of(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE, HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN);
-    private List<String> allowedHttpMethods = List.of(
+    private final List<String> allowedOrigins = List.of("http://localhost:4200/", "http://localhost:52349/");
+    private final List<String> allowedHttpHeaders = List.of(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE, HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN);
+    private final List<String> allowedHttpMethods = List.of(
             GET.name(), POST.name(), PUT.name(), PATCH.name(), DELETE.name(), OPTIONS.name()
     );  
-
 
     @Bean
     UserDetailsService userDetailsService() {

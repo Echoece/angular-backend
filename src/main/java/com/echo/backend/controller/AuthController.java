@@ -1,5 +1,7 @@
 package com.echo.backend.controller;
 
+import com.echo.backend.auth.dto.OAuth2RequestDto;
+import com.echo.backend.auth.enums.ServiceProvider;
 import com.echo.backend.entity.auth.Users;
 import com.echo.backend.exception.customException.ApiAuthorizationException;
 import com.echo.backend.exception.customException.ApiNotFoundException;
@@ -18,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController extends BaseController {
     private final UserService userService;
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Users payload, HttpServletRequest request) throws ApiAuthorizationException {
@@ -54,6 +56,28 @@ public class AuthController {
         userService.delete(id);
         Map<String, String> message = Map.of("message", "User Deleted Successfully");
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @GetMapping("/ouath2/authorization-url/{provider}")
+    public ResponseEntity<?> getAuthorizationUrl(@PathVariable ServiceProvider provider, Map<String, Object> params) throws ApiNotFoundException {
+        return new ResponseEntity<>(
+                ApiResponse.success(
+                        "Authorization URL generated successfully",
+                        userService.getAuthorizationUrl(provider, params)
+                ),
+                HttpStatus.OK
+        );
+    }
+
+    @PostMapping("/oauth2/login")
+    public ResponseEntity<?> oauth2Login(@RequestBody OAuth2RequestDto payload) throws Exception {
+        return new ResponseEntity<>(
+                ApiResponse.success(
+                        "Login successfully",
+                        userService.oAuth2Login(payload)
+                ),
+                HttpStatus.OK
+        );
     }
 
     

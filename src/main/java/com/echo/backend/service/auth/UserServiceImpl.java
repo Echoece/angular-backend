@@ -1,5 +1,9 @@
 package com.echo.backend.service.auth;
 
+import com.echo.backend.auth.OAuth2ProviderFactory;
+import com.echo.backend.auth.dto.OAuth2RequestDto;
+import com.echo.backend.auth.enums.ServiceProvider;
+import com.echo.backend.auth.providers.OAuth2Provider;
 import com.echo.backend.config.security.JwtService;
 import com.echo.backend.entity.auth.Users;
 import com.echo.backend.exception.customException.ApiAuthorizationException;
@@ -22,6 +26,7 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final JwtService jwtService;
+    private final OAuth2ProviderFactory providerFactory;
 
 
     @Override
@@ -92,6 +97,18 @@ public class UserServiceImpl implements UserService{
         payload.setPermissionList(savedUser.getAllPermissions());
 
         return payload;
+    }
+
+    @Override
+    public String getAuthorizationUrl(ServiceProvider provider, Map<String, Object> params) {
+        OAuth2Provider oAuth2Provider = providerFactory.getProvider(provider);
+        return oAuth2Provider.buildAuthorizationUrl(params);
+    }
+
+    @Override
+    public Users oAuth2Login(OAuth2RequestDto payload) throws Exception {
+        OAuth2Provider oAuth2Provider = providerFactory.getProvider(payload.getProvider());
+        return oAuth2Provider.registerAccount(payload);
     }
 
     private String buildToken(Users users){

@@ -1,14 +1,11 @@
 package com.echo.backend.service;
 
 import com.echo.backend.dto.PatientFilter;
-import com.echo.backend.dto.product.ProductFilter;
 import com.echo.backend.entity.Patient;
-import com.echo.backend.entity.examples.Product;
+import com.echo.backend.entity.auth.Users;
 import com.echo.backend.exception.customException.ApiBadRequestException;
 import com.echo.backend.exception.customException.ApiSystemException;
 import com.echo.backend.repository.PatientRepository;
-import com.echo.backend.repository.ProductRepository;
-import com.echo.backend.service.examples.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,9 +23,11 @@ public class PatientServiceImpl implements PatientService {
     private final PatientRepository patientRepository;
 
     @Override
-    public Patient save(Patient payload) throws ApiSystemException {
+    public Patient save(Patient payload, Users user) throws ApiSystemException {
         if (Objects.nonNull(payload.getId()))
             throw new ApiSystemException("cant have id");
+
+        payload.setDoctor(user);
 
         return patientRepository.save(payload);
     }
