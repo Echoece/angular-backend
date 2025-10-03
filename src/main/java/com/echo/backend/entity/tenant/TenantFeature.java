@@ -1,16 +1,14 @@
 package com.echo.backend.entity.tenant;
 
 import com.echo.backend.entity.BaseEntity;
-import com.echo.backend.entity.tenant.enums.TenantSubscriptionStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.echo.backend.entity.tenant.enums.FeatureUpdateStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDate;
+import org.springframework.data.jpa.repository.EntityGraph;
 
 
 /**
@@ -24,12 +22,20 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
+@NamedEntityGraph(
+        name = "TenantFeature.feature",
+        attributeNodes = @NamedAttributeNode("feature")
+)
 public class TenantFeature extends BaseEntity {
     @ManyToOne
     private Tenant tenant;
     @ManyToOne
+    @JsonBackReference
     private TenantSubscription subscription;
     @ManyToOne
     private Feature feature;
     private boolean enabled;
+
+    @Transient
+    FeatureUpdateStatus status;
 }

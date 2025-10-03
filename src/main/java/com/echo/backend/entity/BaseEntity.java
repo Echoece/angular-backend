@@ -23,8 +23,8 @@ public abstract class BaseEntity {
     @Column(name = "id")
     private Long id;
 
-    @Transient
-    private String requestIp;
+    /*@Transient
+    private String requestIp;*/
 
 
     @Override

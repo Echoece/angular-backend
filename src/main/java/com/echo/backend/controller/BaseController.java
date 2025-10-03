@@ -63,6 +63,8 @@ public abstract class BaseController {
         return new ResponseEntity<>(ApiResponse.success("Deleted",null), HttpStatus.NO_CONTENT);
     }
 
-
+    public <T> ResponseEntity<ApiResponse<T>> buildResponseDeleted(T data){
+        return new ResponseEntity<>(ApiResponse.success("Deleted",data), HttpStatus.OK);
+    }
 
 }

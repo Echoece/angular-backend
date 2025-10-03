@@ -10,6 +10,8 @@ import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -70,6 +72,7 @@ import static com.echo.backend.exception.ExceptionConstants.*;
 * */
 @ControllerAdvice
 @RequiredArgsConstructor
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandlerV2 extends ResponseEntityExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandlerV2.class);
 
@@ -330,11 +333,11 @@ public class GlobalExceptionHandlerV2 extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
-    @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<Object> handleMaxUploadSize(MaxUploadSizeExceededException ex, WebRequest request) {
-        ErrorDetailDTO detail = new ErrorDetailDTO();
-        detail.setMessage("Uploaded file is too large. Maximum allowed size exceeded.");
-        return handleExceptionInternal(ex, buildErrorBody(HttpStatus.PAYLOAD_TOO_LARGE, List.of(detail), ex),
-                new HttpHeaders(), HttpStatus.PAYLOAD_TOO_LARGE, request);
-    }
+//    @ExceptionHandler(MaxUploadSizeExceededException.class)
+//    public ResponseEntity<Object> handleMaxUploadSize(MaxUploadSizeExceededException ex, WebRequest request) {
+//        ErrorDetailDTO detail = new ErrorDetailDTO();
+//        detail.setMessage("Uploaded file is too large. Maximum allowed size exceeded.");
+//        return handleExceptionInternal(ex, buildErrorBody(HttpStatus.PAYLOAD_TOO_LARGE, List.of(detail), ex),
+//                new HttpHeaders(), HttpStatus.PAYLOAD_TOO_LARGE, request);
+//    }
 }

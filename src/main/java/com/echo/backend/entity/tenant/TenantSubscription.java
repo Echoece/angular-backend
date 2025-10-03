@@ -10,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 /**
@@ -31,4 +32,7 @@ public class TenantSubscription extends BaseEntity {
     private LocalDate endDate;
     private TenantSubscriptionStatus status;
     private Boolean autoRenew;
+
+    @Transient
+    List<TenantFeature> featureList;
 }
