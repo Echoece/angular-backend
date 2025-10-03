@@ -25,5 +25,8 @@ public class ErrorDTO {
 
     private List<ErrorDetailDTO> details;
 
+    private String timestamp;
+    
+    private String traceId;
 
 }

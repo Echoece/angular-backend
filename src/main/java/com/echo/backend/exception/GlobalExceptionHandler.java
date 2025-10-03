@@ -63,10 +63,10 @@ import static java.util.stream.Collectors.toList;
             control over all aspects of exception handling, you might opt to handle exceptions without using ResponseEntityExceptionHandler.
 * */
 
-@ControllerAdvice
-@RequiredArgsConstructor
+/*@ControllerAdvice
+@RequiredArgsConstructor*/
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    /*private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     private final MessageSource messageSource;
     private final Locale locale = LocaleContextHolder.getLocale();
     @Value("${app.env}")
@@ -228,6 +228,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private String resolveReasonFromStatusCode(HttpStatusCode status){
         return HttpStatus.valueOf(status.value()).getReasonPhrase();
-    }
+    }*/
 
 }
