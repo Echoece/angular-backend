@@ -41,6 +41,33 @@ import java.util.*;
 
 import static com.echo.backend.exception.ExceptionConstants.*;
 
+
+// Extending ResponseEntityExceptionHandler is beneficial if you want to leverage Spring's default exception
+// handling and customize specific cases. However, if your application's needs are simple or if you have a custom
+// exception handling strategy, you might choose not to extend it.
+
+/*
+   Advantages of Extending ResponseEntityExceptionHandler:
+        1. Default Handling: It provides default handling for standard exceptions like MethodArgumentNotValidException,
+            HttpMessageNotReadableException, and others. This means you don't need to implement basic exception handling
+            from scratch.
+
+        2. Customization: You can override methods to customize the response for specific exceptions. For example, you
+            can override handleMethodArgumentNotValid to customize the response for validation errors.
+
+        3. Centralized Handling: It allows you to centralize your exception handling logic in one place, making it
+            easier to manage and maintain.
+
+    When You Might Not Need to Extend ResponseEntityExceptionHandler:
+        1. Simple Applications: If your application has simple exception handling needs and does not require the default
+            behaviors provided by ResponseEntityExceptionHandler, you might manage exceptions directly using @ExceptionHandler methods.
+
+        2. Custom Handling Logic: If you have a completely custom approach to handling exceptions that doesn't benefit from
+            the default behaviors, you might choose to implement your handling logic without extending ResponseEntityExceptionHandler.
+
+        3. Minimal Dependency: If you want to minimize dependencies on Spring's internal classes or prefer a more explicit
+            control over all aspects of exception handling, you might opt to handle exceptions without using ResponseEntityExceptionHandler.
+* */
 @ControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandlerV2 extends ResponseEntityExceptionHandler {
